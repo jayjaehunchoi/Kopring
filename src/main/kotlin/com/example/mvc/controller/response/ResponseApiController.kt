@@ -3,7 +3,11 @@ package com.example.mvc.controller.response
 import com.example.mvc.model.http.UserRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
+import javax.validation.constraints.Min
+import javax.validation.constraints.NotBlank
 
 @RestController
 @RequestMapping("/api/response")
@@ -22,7 +26,8 @@ class ResponseApiController {
             return ResponseEntity.badRequest().body("no age")
         }
 
-        /*
+
+        /* 일반적인 검증
         if (age == null) {
             return ResponseEntity.badRequest().body("no age")
         }
@@ -36,7 +41,7 @@ class ResponseApiController {
 
     // 2. post 200
     @PostMapping
-    fun postMapping(@RequestBody userRequest: UserRequest?) : ResponseEntity<Any> {
+    fun postMapping(@RequestBody @Valid userRequest: UserRequest?) : ResponseEntity<Any> {
         return ResponseEntity.ok(userRequest)
     }
 
